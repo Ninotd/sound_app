@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head style="height:100%">
+  <title>Web Voice Recorder</title>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300" rel="stylesheet">
+  <script>
+    let shouldStop = false;
+    let stopped = false;
+    const player = document.getElementById('player');
+    const stopButton = document.getElementById('stop');
+
+    stopButton.addEventListener('click', function() {
+        shouldStop = true;
+      });
+
+    const handleSuccess = function(stream) {
+      const options = {mimeType: 'audio/webm'};
+      const recordedChunks = [];
+      const mediaRecorder = new MediaRecorder(stream, options);
+
+      mediaRecorder.addEventListener('dataavailable', function(e) {
+        if (e.data.size > 0) {
+          recordedChunks.push(e.data);
+        }
+
+        if(shouldStop === true && stopped === false) {
+          mediaRecorder.stop();
+          stopped = true;
+        }
+      });
+
+      mediaRecorder.addEventListener('stop', function() {
+        downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
+        downloadLink.download = 'acetest.wav';
+      });
+
+      mediaRecorder.start();
+    };
+
+  navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+      .then(handleSuccess);
+
+  </script>
+</head>
+<body>
+  <audio id="player" controls></audio>
+  <h1> Enregostrez un son </h1>
+  <audio id="player" controls></audio>
+  <button id="stop">Stop</button>
+  <form action="/record" method="GET">
+    <div class="form-group">
+      <input type="text" class="form-control">
+    </div>
+  </form>
+</body>
+</html>
