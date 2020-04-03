@@ -1,7 +1,47 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #444;
+  background-color: black;
+  position: flex;
+  height: 100vh;
 }
 
+button {
+  width: 135px;
+  height: 135px;
+  font-size: 0;
+  background-color: red;
+  border: 0;
+  border-radius: 100px;
+  margin: 18px;
+  outline: none;
+}
+
+h1 {
+  color: white;
+  font-family: open-sans;
+  font-size: 40px
+}
+
+.notRec{
+  background-color: darkred;
+}
+
+.Rec{
+  animation-name: pulse;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes pulse{
+  0%{
+    box-shadow: 0px 0px 5px 0px rgba(173,0,0,.3);
+  }
+  65%{
+    box-shadow: 0px 0px 5px 13px rgba(173,0,0,.3);
+  }
+  90%{
+    box-shadow: 0px 0px 5px 13px rgba(173,0,0,0);
+  }
+}
