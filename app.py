@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from db import db
 
 app = Flask(__name__)
+model = pickle.load(open("xgb.pickle.dat", "rb"))
 
 @app.route('/')
 def home():
@@ -10,6 +11,13 @@ def home():
 
 # app.config('SQLAlCHEMY_DATABASE_URI') = "sqlite:///data.db"
 
+@app.route('/predict',methods=['POST'])
+def predict():
+
+    final_features = [np.array(int_features)]
+    prediction = model.predict(final_features)
+
+    print(prediction)
 
 if __name__ == '__main__':
   app.run(port=5000)
