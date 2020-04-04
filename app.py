@@ -5,6 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
+  print ("prout")
   return render_template('home.html')
 
 # app.config('SQLAlCHEMY_DATABASE_URI') = "sqlite:///data.db"
