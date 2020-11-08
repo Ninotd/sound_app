@@ -22,8 +22,7 @@
   </form> -->
 <script>
   const recButton = document.querySelector(".recButton");
-  const recordAudio = function() {
-    console.log("recording");
+  const recordAudio = function() {;
     navigator.mediaDevices.getUserMedia({ audio: true })
       .then(stream => {
       const mediaRecorder = new MediaRecorder(stream);
@@ -41,7 +40,6 @@
         var recording = new Blob([audio], { type: "audio/wav" });
         formData.append('fname', 'test.wav')
         formData.append('file', recording);
-        console.log(formData.get("fname"))
         sendAudio(formData);
       });
 
@@ -53,13 +51,11 @@
     });
   }
   const sendAudio = function (audio) {
-    console.log(audio);
     fetch("/audio", {
       method: "POST",
       contentType: 'multipart/form-data',
       body: audio
-    }).then(function (response) {
-      console.log(response);
+    }).then(function (response) { ;
     })
   }
 

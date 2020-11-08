@@ -1,0 +1,3 @@
+#!/Users/ninoraymond/code/ML_PATH/flask_sound_app/sound_app/venvflask/bin/python3.7
+from numba.pycc import main
+main()
